@@ -1,5 +1,7 @@
 package com.temelt.issuemanagement.api;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +31,7 @@ public class ProjectController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ProjectDto> createProject(@RequestBody ProjectDto project){
+	public ResponseEntity<ProjectDto> createProject(@Valid @RequestBody ProjectDto project){
 		return ResponseEntity.ok(projectServiceImpl.save(project));
 	}
 }
