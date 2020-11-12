@@ -4,8 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import com.temelt.issuemanagement.dto.ProjectDto;
 import com.temelt.issuemanagement.entity.Project;
@@ -15,8 +17,10 @@ import com.temelt.issuemanagement.repository.UserRepository;
 import com.temelt.issuemanagement.service.ProjectService;
 import com.temelt.issuemanagement.util.TPage;
 
+@Service
 public class ProjectServiceImpl implements ProjectService {
-
+    
+  
 	private final ProjectRepository projectRepository;
 	private final ModelMapper modelMapper;
 	private final UserRepository userRepository;
@@ -36,8 +40,8 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		
 		Project prj = modelMapper.map(project, Project.class);
-		User user = userRepository.getOne(project.getManagerId());
-		prj.setManager(user);
+		//User user = userRepository.getOne(project.getManagerId());
+		//prj.setManager(user);
 		
 		prj = projectRepository.save(prj);
 		project.setId(prj.getId());
@@ -82,6 +86,5 @@ public class ProjectServiceImpl implements ProjectService {
 		List<Project> data = projectRepository.findAll();
 		return Arrays.asList(modelMapper.map(data, ProjectDto[].class));
 	}
-		
 
 }

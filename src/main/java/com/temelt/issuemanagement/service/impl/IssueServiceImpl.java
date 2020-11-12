@@ -7,6 +7,7 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import com.temelt.issuemanagement.dto.IssueDto;
 import com.temelt.issuemanagement.entity.Issue;
@@ -17,6 +18,7 @@ import com.temelt.issuemanagement.repository.UserRepository;
 import com.temelt.issuemanagement.service.IssueService;
 import com.temelt.issuemanagement.util.TPage;
 
+@Service
 public class IssueServiceImpl implements IssueService {
 
 	private final IssueRepository issueRepository;

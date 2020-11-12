@@ -4,8 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import com.temelt.issuemanagement.dto.IssueHistoryDto;
 import com.temelt.issuemanagement.entity.Issue;
@@ -14,6 +16,7 @@ import com.temelt.issuemanagement.repository.IssueHistoryRepository;
 import com.temelt.issuemanagement.service.IssueHistoryService;
 import com.temelt.issuemanagement.util.TPage;
 
+@Service
 public class IssueHistoryServiceImpl implements IssueHistoryService {
     
 	private final IssueHistoryRepository issueHistoryRepository;
