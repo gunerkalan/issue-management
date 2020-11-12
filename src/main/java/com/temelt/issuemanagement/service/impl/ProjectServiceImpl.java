@@ -45,8 +45,7 @@ public class ProjectServiceImpl implements ProjectService {
 		
 		prj = projectRepository.save(prj);
 		project.setId(prj.getId());
-		return project;
-		
+		return project;		
 	}
 
 	@Override
@@ -85,6 +84,26 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<ProjectDto> getAll() {
 		List<Project> data = projectRepository.findAll();
 		return Arrays.asList(modelMapper.map(data, ProjectDto[].class));
+	}
+
+	@Override
+	public ProjectDto update(Long id, ProjectDto project) {
+		Project projectDb = projectRepository.getOne(id);
+		if(projectDb==null) {
+			throw new IllegalArgumentException("Project Does Not Exist ID:" + id);
+		}
+		
+		Project projectCheck = projectRepository.getByProjectCode(project.getProjectCode());
+		
+		if(projectCheck != null && projectCheck.getId() != projectDb.getId()) {
+			throw new IllegalArgumentException("Project Code Already Exist");
+		}
+		
+		projectDb.setProjectCode(project.getProjectCode());
+		projectDb.setProjectName(project.getProjectName());
+		
+		projectRepository.save(projectDb);
+		return modelMapper.map(projectDb, ProjectDto.class);
 	}
 
 }
