@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.temelt.issuemanagement.dto.ProjectDto;
 import com.temelt.issuemanagement.service.impl.ProjectServiceImpl;
+import com.temelt.issuemanagement.util.ApiPaths;
 
 @RestController
-@RequestMapping("/project")
+@RequestMapping(ApiPaths.ProjectCtrl.CTRL)
 public class ProjectController {
      
 	private final ProjectServiceImpl projectServiceImpl;

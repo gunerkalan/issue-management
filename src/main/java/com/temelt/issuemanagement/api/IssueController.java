@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.temelt.issuemanagement.dto.IssueDto;
-import com.temelt.issuemanagement.dto.ProjectDto;
 import com.temelt.issuemanagement.service.impl.IssueServiceImpl;
+import com.temelt.issuemanagement.util.ApiPaths;
 
 @RestController
-@RequestMapping("/issue")
+@RequestMapping(ApiPaths.IssueCtrl.CTRL)
 public class IssueController {
   
 	private final IssueServiceImpl issueServiceImpl;
