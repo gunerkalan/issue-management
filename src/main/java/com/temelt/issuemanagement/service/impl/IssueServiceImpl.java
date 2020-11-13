@@ -73,5 +73,18 @@ public class IssueServiceImpl implements IssueService {
 		List<Issue> data = issueRepository.findAll();
 		return Arrays.asList(modelMapper.map(data, IssueDto[].class));
 	}
+
+	@Override
+	public IssueDto update(Long id, IssueDto issue) {
+		Issue issueDb = issueRepository.getOne(id);
+		
+		issueDb.setDate(issue.getDate());
+		issueDb.setDescription(issue.getDescription());
+		issueDb.setDetails(issue.getDetails());
+		issueDb.setIssueStatus(issue.getIssueStatus());
+		issueRepository.save(issueDb);
+		
+		return modelMapper.map(issueDb,IssueDto.class);
+	}
 		
 }

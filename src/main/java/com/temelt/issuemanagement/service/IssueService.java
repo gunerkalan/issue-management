@@ -20,4 +20,6 @@ public interface IssueService {
 	Boolean delete(Long issueId);
    
 	List<IssueDto> getAll();
+	
+	IssueDto update(Long id, IssueDto issue);
 }
