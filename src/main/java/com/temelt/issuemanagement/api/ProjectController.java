@@ -1,7 +1,10 @@
 package com.temelt.issuemanagement.api;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.temelt.issuemanagement.dto.ProjectDto;
 import com.temelt.issuemanagement.service.impl.ProjectServiceImpl;
 import com.temelt.issuemanagement.util.ApiPaths;
+import com.temelt.issuemanagement.util.TPage;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,6 +36,20 @@ public class ProjectController {
 		this.projectServiceImpl = projectServiceImpl;
 		
 	}
+	
+    @GetMapping("/pagination")
+	@ApiOperation(value = "Get By Pagination Operation", response = ProjectDto.class)
+	public ResponseEntity<TPage<ProjectDto>> getAllByPagination(Pageable pageable) {
+	    TPage<ProjectDto> data = projectServiceImpl.getAllPageable(pageable);
+	    return ResponseEntity.ok(data);
+	}
+    
+    @GetMapping()
+    @ApiOperation(value = "Get All Operation", response = ProjectDto.class, responseContainer = "List")
+    public ResponseEntity<List<ProjectDto>> getAll(){
+    	List<ProjectDto> data = projectServiceImpl.getAll();
+    	return ResponseEntity.ok(data);
+    }
 	
 	@GetMapping("/{id}")
 	@ApiOperation(value = "Get By Id Operation", response = ProjectDto.class)
